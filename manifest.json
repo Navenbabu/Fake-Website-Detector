@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Website Safety Checker",
+  "version": "1.0",
+  "description": "Analyze if a website is fake or genuine using APIs (VirusTotal, Google Safe Browsing, WHOIS) and heuristic patterns.",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "host_permissions": [
+    "https://www.virustotal.com/*",
+    "https://safebrowsing.googleapis.com/*",
+    "https://archive.org/*",
+    "https://www.whoisxmlapi.com/*" // Added WHOIS API permission
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
